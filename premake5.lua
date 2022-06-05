@@ -2,13 +2,18 @@ project "sdbus"
 	kind "StaticLib"
 	language "C"
 	staticruntime "off"
+	pic "On"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    IncludeDir["sdbus"] = {}
+    IncludeDir["sdbus"]["0"] = "%{ThirdParty.folder}/sdbus/include"
+
 	files
 	{
-		"src/*.*"
+		"src/*.*",
+		"include/**.*"
 	}
 	
 	includedirs{
@@ -17,7 +22,6 @@ project "sdbus"
 	}
 
 	filter "system:linux"
-		pic "On"
 
 		systemversion "latest"
 		
